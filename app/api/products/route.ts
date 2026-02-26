@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authenticatedFetch, handleApiError } from "../middleware";
 
-const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4001';
+const BACKEND_URL = process.env.BACKEND_URL || 'https://arjeninventoryproductsever.vercel.app';
 
 export async function GET(req: NextRequest) {
   try {

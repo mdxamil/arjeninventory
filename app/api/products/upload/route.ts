@@ -5,7 +5,7 @@ import type { UploadApiErrorResponse, UploadApiResponse } from "cloudinary";
 
 import { Readable } from "stream";
 
-const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4001';
+const BACKEND_URL = process.env.BACKEND_URL || 'https://arjeninventoryproductsever.vercel.app';
 
 // Configure Cloudinary
 cloudinary.config({

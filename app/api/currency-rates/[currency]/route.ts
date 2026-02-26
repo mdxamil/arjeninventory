@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from "next/headers";
 
-const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4001';
+const BACKEND_URL = process.env.BACKEND_URL || 'https://arjeninventoryproductsever.vercel.app';
 
 // GET currency rate by currency code
 export async function GET(

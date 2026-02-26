@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthToken } from "../../middleware";
 
-const WHOLESALE_BACKEND_URL = process.env.WHOLESALE_BACKEND_URL || 'http://localhost:4002';
+const WHOLESALE_BACKEND_URL = process.env.WHOLESALE_BACKEND_URL || 'https://arjeninventorywholesalesever.vercel.app';
 
 // GET single wholesale order
 export async function GET(

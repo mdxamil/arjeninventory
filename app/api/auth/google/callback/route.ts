@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4001';
+const BACKEND_URL = process.env.BACKEND_URL || 'https://arjeninventoryproductsever.vercel.app';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
