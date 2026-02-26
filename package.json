@@ -1,0 +1,41 @@
+{
+  "name": "all-prodect-listing",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@auth/core": "^0.34.3",
+    "@heroicons/react": "^2.2.0",
+    "@imagekit/javascript": "^5.2.1",
+    "@imagekit/next": "^2.1.5",
+    "@imagekit/nodejs": "^7.3.0",
+    "@tanstack/react-query": "^5.90.21",
+    "cloudinary": "^2.9.0",
+    "lucide-react": "^0.575.0",
+    "next": "16.1.6",
+    "next-auth": "5.0.0-beta.30",
+    "next-pwa": "^5.6.0",
+    "nodemailer": "^8.0.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "streamifier": "^0.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@tanstack/eslint-plugin-query": "^5.91.4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/streamifier": "^0.1.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
