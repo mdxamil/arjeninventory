@@ -157,8 +157,7 @@ export default function Sidebar({ onCopyToggle, isCopySidebarOpen }: SidebarProp
         <div className="flex h-full flex-col">
           {/* Header */}
           <div className="border-b border-neutral-200 px-6 py-5">
-            <h1 className="text-xl font-bold text-neutral-900">Rifat Dashboard</h1>
-            <p className="mt-1 text-xs text-neutral-500">Admin Panel</p>
+            <h1 className="text-xl font-bold text-neutral-900">Arjen Inventory</h1>
           </div>
 
           {/* User Info */}
