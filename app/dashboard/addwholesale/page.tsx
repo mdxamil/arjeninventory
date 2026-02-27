@@ -49,6 +49,7 @@ interface CreateOrderData {
     profit: number;
   }>;
   totalWeight: number;
+  shippmenttype: string;
 }
 
 export default function AddWholesalePage() {
@@ -66,6 +67,7 @@ export default function AddWholesalePage() {
   });
   const [items, setItems] = useState<WholesaleItem[]>([]);
   const [totalWeight, setTotalWeight] = useState<string>("");
+  const [shippmentType, setShippmentType] = useState<string>("air");
   const [customCategories, setCustomCategories] = useState<string[]>([]);
   const [toast, setToast] = useState<{
     message: string;
@@ -291,6 +293,11 @@ export default function AddWholesalePage() {
       return;
     }
 
+    if (!shippmentType) {
+      showToast("Please select shipment type", "warning");
+      return;
+    }
+
     // Store uploaded items with their data
     const uploadedItems: Array<{
       id: string;
@@ -383,6 +390,7 @@ export default function AddWholesalePage() {
         profit: parseFloat(item.profit),
       })),
       totalWeight: parseFloat(totalWeight),
+      shippmenttype: shippmentType,
     };
 
     // Send order to backend
@@ -606,19 +614,36 @@ export default function AddWholesalePage() {
 
                 {/* Total Weight Input */}
                 {items.length > 0 && (
-                  <div className="mb-4 sm:mb-6">
-                    <label className="mb-1 block text-xs sm:text-sm font-medium text-gray-900">
-                      Total Weight (kg) <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={totalWeight}
-                      onChange={(e) => setTotalWeight(e.target.value)}
-                      className="w-full max-w-xs rounded-lg border border-gray-300 px-3 sm:px-4 py-2 text-sm sm:text-base text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                      placeholder="Enter total weight"
-                      min="0"
-                    />
+                  <div className="mb-4 sm:mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="mb-1 block text-xs sm:text-sm font-medium text-gray-900">
+                        Total Weight (kg) <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        value={totalWeight}
+                        onChange={(e) => setTotalWeight(e.target.value)}
+                        className="w-full rounded-lg border border-gray-300 px-3 sm:px-4 py-2 text-sm sm:text-base text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        placeholder="Enter total weight"
+                        min="0"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="mb-1 block text-xs sm:text-sm font-medium text-gray-900">
+                        Shipment Type <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        value={shippmentType}
+                        onChange={(e) => setShippmentType(e.target.value)}
+                        className="w-full rounded-lg border border-gray-300 px-3 sm:px-4 py-2 text-sm sm:text-base text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      >
+                        <option value="air">Air</option>
+                        <option value="sea">Sea</option>
+                        <option value="luggage">Luggage</option>
+                      </select>
+                    </div>
                   </div>
                 )}
 
