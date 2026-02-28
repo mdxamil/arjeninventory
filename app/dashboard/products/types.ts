@@ -2,6 +2,7 @@ export interface Product {
   id: string;
   category: string;
   imageUrl: string;
+  imageCloudinaryId: string;
   description: string;
   price: string;
   originalPrice: string;

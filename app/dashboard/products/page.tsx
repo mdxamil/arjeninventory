@@ -116,7 +116,13 @@ export default function ProductsPage() {
     if (!window.confirm("Are you sure you want to permanently delete this product?")) return;
     setIsDeleting(productId);
     try {
-      const response = await fetch(`/api/products/${productId}`, { method: "DELETE" });
+      const response = await fetch(`/api/products/${productId}`, { 
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          imageCloudinaryId: productToDelete?.imageCloudinaryId 
+        }),
+      });
       const { error } = await handleApiResponse(response, "Failed to delete product");
       if (error) { showToast(error.message, error.type); return; }
       showToast("Product deleted successfully", "success");

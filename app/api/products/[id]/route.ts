@@ -1,7 +1,15 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { v2 as cloudinary } from "cloudinary";
 
-const BACKEND_URL = process.env.BACKEND_URL || 'https://arjeninventoryproductsever.vercel.app';
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4001';
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function DELETE(
   req: Request,
@@ -19,6 +27,22 @@ export async function DELETE(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Get cloudinary ID from request body
+    const body = await req.json();
+    const imageCloudinaryId = body.imageCloudinaryId;
+    
+    // Delete image from Cloudinary if it exists
+    if (imageCloudinaryId) {
+      try {
+        await cloudinary.uploader.destroy(imageCloudinaryId);
+        console.log("Cloudinary image deleted:", imageCloudinaryId);
+      } catch (cloudinaryError) {
+        console.error("Failed to delete from Cloudinary:", cloudinaryError);
+        // Continue with backend deletion even if Cloudinary deletion fails
+      }
+    }
+
+    // Delete from backend
     const backendUrl = `${BACKEND_URL}/api/products/${id}`;
     
     const response = await fetch(backendUrl, {

@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-const BACKEND_URL = process.env.BACKEND_URL || 'https://arjeninventoryproductsever.vercel.app';
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4001';
 
 // GET all shipment costs
 export async function GET() {

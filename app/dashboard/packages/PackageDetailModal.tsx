@@ -137,11 +137,7 @@ export default function PackageDetailModal({
             <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4">
               <h3 className="text-sm font-semibold text-gray-900 mb-3">Pricing Information</h3>
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">Raw Cost</span>
-                  <span className="font-semibold text-gray-900">৳{pkg.packageRawCost}</span>
-                </div>
-
+                
                 {userRole === "owner" && (
                   <>
                     {pkg.profit !== undefined && (

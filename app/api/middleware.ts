@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-const BACKEND_URL = process.env.BACKEND_URL || 'https://arjeninventoryproductsever.vercel.app';
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4001';
 
 export async function getAuthToken(): Promise<string | null> {
   const token = (await cookies()).get("token");
