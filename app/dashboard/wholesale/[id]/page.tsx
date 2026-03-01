@@ -428,66 +428,122 @@ export default function WholesaleDetailPage() {
               </button>
               
               <div className={`px-3 pb-3 sm:px-5 sm:pb-5 space-y-2.5 sm:space-y-4 border-t border-gray-100 pt-3 sm:pt-0 sm:border-0 ${showProducts ? 'block' : 'hidden'} lg:block`}>
-                  {order.products.map((product) => (
-                    <div
-                      key={product.id}
-                      className="flex gap-2.5 sm:gap-4 rounded-lg border border-gray-200 bg-gray-50 p-2.5 sm:p-4"
-                    >
-                      {/* Image */}
-                      <div className="shrink-0">
-                        <div className="relative h-16 w-16 sm:h-24 sm:w-24 overflow-hidden rounded-lg border-2 border-gray-300">
-                          <Image
-                            src={product.imageUrl}
-                            alt={`Product ${product.productNumber}`}
-                            className="object-cover"
-                            fill
-                            unoptimized
-                          />
-                        </div>
-                      </div>
-
-                      {/* Details */}
-                      <div className="flex-1 min-w-0 space-y-1.5 sm:space-y-2">
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="flex-1 min-w-0">
-                            <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-800">
-                              #{product.productNumber}
-                            </span>
-                            <h3 className="mt-1 text-sm sm:text-base font-bold text-gray-900 truncate">
-                              {product.category}
-                            </h3>
+                  {order.products.map((product) => {
+                    const perUnitRawPrice = product.quantity > 0 
+                      ? (parseFloat(product.rawPrice) / product.quantity).toFixed(2)
+                      : "0.00";
+                    const perUnitProfit = product.quantity > 0
+                      ? (parseFloat(product.profit) / product.quantity).toFixed(2)
+                      : "0.00";
+                    const perUnitFinalPrice = product.quantity > 0
+                      ? (parseFloat(product.finalPrice) / product.quantity).toFixed(2)
+                      : "0.00";
+                    
+                    return (
+                      <div
+                        key={product.id}
+                        className="flex gap-2.5 sm:gap-4 rounded-lg border border-gray-200 bg-gray-50 p-2.5 sm:p-4"
+                      >
+                        {/* Image */}
+                        <div className="shrink-0">
+                          <div className="relative h-16 w-16 sm:h-24 sm:w-24 overflow-hidden rounded-lg border-2 border-gray-300">
+                            <Image
+                              src={product.imageUrl}
+                              alt={`Product ${product.productNumber}`}
+                              className="object-cover"
+                              fill
+                              unoptimized
+                            />
                           </div>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm">
-                          <div>
-                            <label className="text-xs font-medium text-gray-500">Quantity</label>
-                            <p className="font-bold text-gray-900 mt-0.5">
+                        {/* Details */}
+                        <div className="flex-1 min-w-0 space-y-1.5 sm:space-y-2">
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="flex-1 min-w-0">
+                              <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-800">
+                                #{product.productNumber}
+                              </span>
+                              <h3 className="mt-1 text-sm sm:text-base font-bold text-gray-900 truncate">
+                                {product.category}
+                              </h3>
+                            </div>
+                          </div>
+
+                          {/* Quantity & Type */}
+                          <div className="flex items-center gap-2 text-xs sm:text-sm">
+                            <span className="font-medium text-gray-700">Quantity:</span>
+                            <span className="font-bold text-gray-900">
                               {product.quantity} {product.quantityType}
-                            </p>
+                            </span>
                           </div>
-                          <div>
-                            <label className="text-xs font-medium text-gray-500">Raw Price</label>
-                            <p className="font-bold text-gray-900 mt-0.5">
-                              ৳{parseFloat(product.rawPrice).toFixed(2)}
-                            </p>
-                          </div>
-                          <div>
-                            <label className="text-xs font-medium text-gray-500">Profit</label>
-                            <p className="font-bold text-green-600 mt-0.5">
-                              ৳{parseFloat(product.profit).toFixed(2)}
-                            </p>
-                          </div>
-                          <div>
-                            <label className="text-xs font-medium text-gray-500">Final Price</label>
-                            <p className="font-bold text-gray-900 mt-0.5">
-                              ৳{parseFloat(product.finalPrice).toFixed(2)}
-                            </p>
+
+                          {/* Pricing Grid */}
+                          <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs">
+                            {/* Per Unit Raw Price */}
+                            <div className="bg-white rounded-lg p-2 border border-gray-200">
+                              <label className="block text-[10px] sm:text-xs font-medium text-gray-500 mb-0.5">
+                                Per Unit Raw Price
+                              </label>
+                              <p className="font-semibold text-gray-900 text-xs sm:text-sm">
+                                ৳{perUnitRawPrice}
+                              </p>
+                            </div>
+
+                            {/* Total Raw Price */}
+                            <div className="bg-white rounded-lg p-2 border border-gray-200">
+                              <label className="block text-[10px] sm:text-xs font-medium text-gray-500 mb-0.5">
+                                Total Raw Price
+                              </label>
+                              <p className="font-bold text-gray-900 text-xs sm:text-sm">
+                                ৳{parseFloat(product.rawPrice).toFixed(2)}
+                              </p>
+                            </div>
+
+                            {/* Per Unit Profit */}
+                            <div className="bg-white rounded-lg p-2 border border-gray-200">
+                              <label className="block text-[10px] sm:text-xs font-medium text-gray-500 mb-0.5">
+                                Per Unit Profit
+                              </label>
+                              <p className="font-semibold text-green-600 text-xs sm:text-sm">
+                                ৳{perUnitProfit}
+                              </p>
+                            </div>
+
+                            {/* Total Profit */}
+                            <div className="bg-white rounded-lg p-2 border border-gray-200">
+                              <label className="block text-[10px] sm:text-xs font-medium text-gray-500 mb-0.5">
+                                Total Profit
+                              </label>
+                              <p className="font-bold text-green-600 text-xs sm:text-sm">
+                                ৳{parseFloat(product.profit).toFixed(2)}
+                              </p>
+                            </div>
+
+                            {/* Per Unit Final Price */}
+                            <div className="bg-blue-50 rounded-lg p-2 border border-blue-200">
+                              <label className="block text-[10px] sm:text-xs font-medium text-blue-700 mb-0.5">
+                                Per Unit Final
+                              </label>
+                              <p className="font-semibold text-blue-900 text-xs sm:text-sm">
+                                ৳{perUnitFinalPrice}
+                              </p>
+                            </div>
+
+                            {/* Total Final Price */}
+                            <div className="bg-blue-50 rounded-lg p-2 border border-blue-200">
+                              <label className="block text-[10px] sm:text-xs font-medium text-blue-700 mb-0.5">
+                                Total Final Price
+                              </label>
+                              <p className="font-bold text-blue-900 text-xs sm:text-sm">
+                                ৳{parseFloat(product.finalPrice).toFixed(2)}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ import Toast from "../../components/Toast";
 import { handleApiResponse } from "../../utils/errorHandler";
 import type { Product, PaginationData, EditProductPayload } from "./types";
 
-const categories = ["All", "Shoes", "Bags", "Electronics", "Gifts", "Wrapping", "Box"];
+const categories = ["All", "Shoes", "Bags", "Electronics", "Gifts", "Wrapping", "Box", "Sunglass", "Men Inner", "Women Inner"];
 
 export default function ProductsPage() {
   const router = useRouter();

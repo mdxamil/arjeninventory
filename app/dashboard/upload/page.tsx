@@ -5,7 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import Toast from "../../components/Toast";
 import { handleApiResponse } from "../../utils/errorHandler";
 
-const categories = ["Shoes", "Bags", "Electronics", "Gifts", "Wrapping" , "Box" ];
+const categories = ["Shoes", "Bags", "Electronics", "Gifts", "Wrapping", "Box", "Sunglass", "Men Inner", "Women Inner"];
 
 export default function UploadPage() {
   const { user, isLoading } = useAuth();
